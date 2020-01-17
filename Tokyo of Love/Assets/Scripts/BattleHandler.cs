@@ -19,6 +19,7 @@ public class BattleHandler : MonoBehaviour
     public CharacterBattle activeCharacter;
     public CharacterBattle selectedEnemy;
     public CharacterBattle allyTarget;
+    public CharacterBattle enemyTarget;
 
     public State state;
     public uint enemies = 3;
@@ -33,7 +34,9 @@ public class BattleHandler : MonoBehaviour
     private CharacterBattle enemy3Battle;
 
     uint characterSpawn = 0;
-    uint enemySpawn = 0; 
+    uint enemySpawn = 0;
+
+    public bool IsHumanPlaying = false;
 
     public enum State
     {
@@ -59,6 +62,7 @@ public class BattleHandler : MonoBehaviour
         selectedEnemy = enemy3Battle;
         selectedEnemy.ShowArrow();
         allyTarget = AllyBattle1;
+        enemyTarget = enemyBattle;
         state = State.WaitingForPlayer;
     }
 
@@ -164,121 +168,325 @@ public class BattleHandler : MonoBehaviour
     public void ChooseNextActiveCharacter()
     {
         if (BattleOver()) return;
-
-        // Enemy 1 turn
-        if (activeCharacter == AllyBattle1)
+        if (IsHumanPlaying)
         {
-            SetActiveCharacterBattle(enemyBattle);
-            if (enemyBattle.IsDead() == false) {
-
-                activeCharacter.blocking = false;
-                state = State.Busy;
-
-                int randomAction = Random.Range(1, 4);
-
-                if (randomAction == 1)
+            // Enemy 1 turn
+            if (activeCharacter == AllyBattle1)
+            {
+                SetActiveCharacterBattle(enemyBattle);
+                if (enemyBattle.IsDead() == false)
                 {
-                    enemyBattle.Attack(allyTarget, () =>
+
+                    activeCharacter.blocking = false;
+                    state = State.Busy;
+
+                    int randomAction = Random.Range(1, 4);
+
+                    if (randomAction == 1)
                     {
-                        ChooseNextActiveCharacter();
-                    });
-                }
-                else if (randomAction == 2)
-                {
-                    enemyBattle.blocking = true;
-                    ChooseNextActiveCharacter();
-                }
-                else if (randomAction >= 3)
-                {
-                    enemyBattle.Heal(Random.Range(enemyBattle.healmin, enemyBattle.healmax));
-                    ChooseNextActiveCharacter();
-                }
-        } else ChooseNextActiveCharacter();
-        }
-        // Ally2 turn
-        else if (activeCharacter == enemyBattle)
-        {
-            SetActiveCharacterBattle(AllyBattle3);
-            if (AllyBattle3.IsDead() == false) {
-                activeCharacter.blocking = false;
-                state = State.WaitingForPlayer;
-            } else ChooseNextActiveCharacter();
-        }
-        // Enemy 2 turn
-        else if (activeCharacter == AllyBattle3)
-        {
-            SetActiveCharacterBattle(enemy2Battle);
-            if (enemy2Battle.IsDead() == false) {
-                activeCharacter.blocking = false;
-                state = State.Busy;
-
-                int randomAction = Random.Range(1, 4);
-
-                if (randomAction == 1)
-                {
-                    enemy2Battle.Attack(allyTarget, () =>
+                        enemyBattle.Attack(allyTarget, () =>
+                        {
+                            ChooseNextActiveCharacter();
+                        });
+                    }
+                    else if (randomAction == 2)
                     {
+                        enemyBattle.blocking = true;
                         ChooseNextActiveCharacter();
-                    });
-                }
-                else if (randomAction == 2)
-                {
-                    enemy2Battle.blocking = true;
-                    ChooseNextActiveCharacter();
-                }
-                else if (randomAction >= 3)
-                {
-                    enemy2Battle.Heal(Random.Range(enemy2Battle.healmin, enemy2Battle.healmax));
-                    ChooseNextActiveCharacter();
-                }
-            } else ChooseNextActiveCharacter();
-        }
-        // Ally3 turn
-        else if (activeCharacter == enemy2Battle)
-        {
-            SetActiveCharacterBattle(AllyBattle2);
-            if (AllyBattle2.IsDead() == false) {
-                activeCharacter.blocking = false;
-                state = State.WaitingForPlayer;
-            } else ChooseNextActiveCharacter();
-        }
-        // Enemy 3 turn
-        else if (activeCharacter == AllyBattle2)
-        {
-            SetActiveCharacterBattle(enemy3Battle);
-            if (enemy3Battle.IsDead() == false) {
-                activeCharacter.blocking = false;
-                state = State.Busy;
-
-                int randomAction = Random.Range(1, 4);
-
-                if (randomAction == 1)
-                {
-                    enemy3Battle.Attack(allyTarget, () =>
+                    }
+                    else if (randomAction >= 3)
                     {
+                        enemyBattle.Heal(Random.Range(enemyBattle.healmin, enemyBattle.healmax));
                         ChooseNextActiveCharacter();
-                    });
+                    }
                 }
-                else if (randomAction == 2)
+                else ChooseNextActiveCharacter();
+            }
+            // Ally2 turn
+            else if (activeCharacter == enemyBattle)
+            {
+                SetActiveCharacterBattle(AllyBattle3);
+                if (AllyBattle3.IsDead() == false)
                 {
-                    enemy3Battle.blocking = true;
-                    ChooseNextActiveCharacter();
+                    activeCharacter.blocking = false;
+                    state = State.WaitingForPlayer;
                 }
-                else if (randomAction >= 3)
+                else ChooseNextActiveCharacter();
+            }
+            // Enemy 2 turn
+            else if (activeCharacter == AllyBattle3)
+            {
+                SetActiveCharacterBattle(enemy2Battle);
+                if (enemy2Battle.IsDead() == false)
                 {
-                    enemy3Battle.Heal(Random.Range(enemy3Battle.healmin, enemy3Battle.healmax));
-                    ChooseNextActiveCharacter();
+                    activeCharacter.blocking = false;
+                    state = State.Busy;
+
+                    int randomAction = Random.Range(1, 4);
+
+                    if (randomAction == 1)
+                    {
+                        enemy2Battle.Attack(allyTarget, () =>
+                        {
+                            ChooseNextActiveCharacter();
+                        });
+                    }
+                    else if (randomAction == 2)
+                    {
+                        enemy2Battle.blocking = true;
+                        ChooseNextActiveCharacter();
+                    }
+                    else if (randomAction >= 3)
+                    {
+                        enemy2Battle.Heal(Random.Range(enemy2Battle.healmin, enemy2Battle.healmax));
+                        ChooseNextActiveCharacter();
+                    }
                 }
-            } else ChooseNextActiveCharacter();
+                else ChooseNextActiveCharacter();
+            }
+            // Ally3 turn
+            else if (activeCharacter == enemy2Battle)
+            {
+                SetActiveCharacterBattle(AllyBattle2);
+                if (AllyBattle2.IsDead() == false)
+                {
+                    activeCharacter.blocking = false;
+                    state = State.WaitingForPlayer;
+                }
+                else ChooseNextActiveCharacter();
+            }
+            // Enemy 3 turn
+            else if (activeCharacter == AllyBattle2)
+            {
+                SetActiveCharacterBattle(enemy3Battle);
+                if (enemy3Battle.IsDead() == false)
+                {
+                    activeCharacter.blocking = false;
+                    state = State.Busy;
+
+                    int randomAction = Random.Range(1, 4);
+
+                    if (randomAction == 1)
+                    {
+                        enemy3Battle.Attack(allyTarget, () =>
+                        {
+                            ChooseNextActiveCharacter();
+                        });
+                    }
+                    else if (randomAction == 2)
+                    {
+                        enemy3Battle.blocking = true;
+                        ChooseNextActiveCharacter();
+                    }
+                    else if (randomAction >= 3)
+                    {
+                        enemy3Battle.Heal(Random.Range(enemy3Battle.healmin, enemy3Battle.healmax));
+                        ChooseNextActiveCharacter();
+                    }
+                }
+                else ChooseNextActiveCharacter();
+            }
+            // Ally1 turn
+            else
+            {
+                SetActiveCharacterBattle(AllyBattle1);
+                if (AllyBattle1.IsDead() == false)
+                {
+                    activeCharacter.blocking = false;
+                    state = State.WaitingForPlayer;
+                }
+                else ChooseNextActiveCharacter();
         }
-        // Ally1 turn
-        else
+        }
+        else//-----------------------------------------
         {
-            SetActiveCharacterBattle(AllyBattle1);
-            if (AllyBattle1.IsDead() == false) {
-                activeCharacter.blocking = false;
-                state = State.WaitingForPlayer;
-            } else ChooseNextActiveCharacter();
+            // Enemy 1 turn
+            if (activeCharacter == AllyBattle1)
+            {
+                SetActiveCharacterBattle(enemyBattle);
+                if (enemyBattle.IsDead() == false)
+                {
+
+                    activeCharacter.blocking = false;
+                    state = State.Busy;
+
+                    int randomAction = Random.Range(1, 4);
+
+                    if (randomAction == 1)
+                    {
+                        enemyBattle.Attack(allyTarget, () =>
+                        {
+                            ChooseNextActiveCharacter();
+                        });
+                    }
+                    else if (randomAction == 2)
+                    {
+                        enemyBattle.blocking = true;
+                        ChooseNextActiveCharacter();
+                    }
+                    else if (randomAction >= 3)
+                    {
+                        enemyBattle.Heal(Random.Range(enemyBattle.healmin, enemyBattle.healmax));
+                        ChooseNextActiveCharacter();
+                    }
+                }
+                else ChooseNextActiveCharacter();
+            }
+            // Ally2 turn
+            else if (activeCharacter == enemyBattle)
+            {
+                SetActiveCharacterBattle(AllyBattle3);
+                if (AllyBattle3.IsDead() == false)
+                {
+                    activeCharacter.blocking = false;
+                    state = State.Busy;
+
+                    int randomAction = Random.Range(1, 4);
+
+                    if (randomAction == 1)
+                    {
+                        AllyBattle3.Attack(enemyTarget, () =>
+                        {
+                            ChooseNextActiveCharacter();
+                        });
+                    }
+                    else if (randomAction == 2)
+                    {
+                        AllyBattle3.blocking = true;
+                        ChooseNextActiveCharacter();
+                    }
+                    else if (randomAction >= 3)
+                    {
+                        AllyBattle3.Heal(Random.Range(AllyBattle3.healmin, AllyBattle3.healmax));
+                        ChooseNextActiveCharacter();
+                    }
+                }
+                else ChooseNextActiveCharacter();
+            }
+            // Enemy 2 turn
+            else if (activeCharacter == AllyBattle3)
+            {
+                SetActiveCharacterBattle(enemy2Battle);
+                if (enemy2Battle.IsDead() == false)
+                {
+                    activeCharacter.blocking = false;
+                    state = State.Busy;
+
+                    int randomAction = Random.Range(1, 4);
+
+                    if (randomAction == 1)
+                    {
+                        enemy2Battle.Attack(allyTarget, () =>
+                        {
+                            ChooseNextActiveCharacter();
+                        });
+                    }
+                    else if (randomAction == 2)
+                    {
+                        enemy2Battle.blocking = true;
+                        ChooseNextActiveCharacter();
+                    }
+                    else if (randomAction >= 3)
+                    {
+                        enemy2Battle.Heal(Random.Range(enemy2Battle.healmin, enemy2Battle.healmax));
+                        ChooseNextActiveCharacter();
+                    }
+                }
+                else ChooseNextActiveCharacter();
+            }
+            // Ally3 turn
+            else if (activeCharacter == enemy2Battle)
+            {
+                SetActiveCharacterBattle(AllyBattle2);
+                if (AllyBattle2.IsDead() == false)
+                {
+                    activeCharacter.blocking = false;
+                    state = State.Busy;
+
+                    int randomAction = Random.Range(1, 4);
+
+                    if (randomAction == 1)
+                    {
+                        AllyBattle2.Attack(enemyTarget, () =>
+                        {
+                            ChooseNextActiveCharacter();
+                        });
+                    }
+                    else if (randomAction == 2)
+                    {
+                        AllyBattle2.blocking = true;
+                        ChooseNextActiveCharacter();
+                    }
+                    else if (randomAction >= 3)
+                    {
+                        AllyBattle2.Heal(Random.Range(AllyBattle2.healmin, AllyBattle2.healmax));
+                        ChooseNextActiveCharacter();
+                    }
+                }
+                else ChooseNextActiveCharacter();
+            }
+            // Enemy 3 turn
+            else if (activeCharacter == AllyBattle2)
+            {
+                SetActiveCharacterBattle(enemy3Battle);
+                if (enemy3Battle.IsDead() == false)
+                {
+                    activeCharacter.blocking = false;
+                    state = State.Busy;
+
+                    int randomAction = Random.Range(1, 4);
+
+                    if (randomAction == 1)
+                    {
+                        enemy3Battle.Attack(allyTarget, () =>
+                        {
+                            ChooseNextActiveCharacter();
+                        });
+                    }
+                    else if (randomAction == 2)
+                    {
+                        enemy3Battle.blocking = true;
+                        ChooseNextActiveCharacter();
+                    }
+                    else if (randomAction >= 3)
+                    {
+                        enemy3Battle.Heal(Random.Range(enemy3Battle.healmin, enemy3Battle.healmax));
+                        ChooseNextActiveCharacter();
+                    }
+                }
+                else ChooseNextActiveCharacter();
+            }
+            // Ally1 turn
+            else
+            {
+                SetActiveCharacterBattle(AllyBattle1);
+                if (AllyBattle1.IsDead() == false)
+                {
+                    activeCharacter.blocking = false;
+                    state = State.Busy;
+
+                    int randomAction = Random.Range(1, 4);
+
+                    if (randomAction == 1)
+                    {
+                        AllyBattle1.Attack(enemyTarget, () =>
+                        {
+                            ChooseNextActiveCharacter();
+                        });
+                    }
+                    else if (randomAction == 2)
+                    {
+                        AllyBattle1.blocking = true;
+                        ChooseNextActiveCharacter();
+                    }
+                    else if (randomAction >= 3)
+                    {
+                        AllyBattle1.Heal(Random.Range(AllyBattle1.healmin, AllyBattle1.healmax));
+                        ChooseNextActiveCharacter();
+                    }
+                }
+                else ChooseNextActiveCharacter();
+            }
         }
     }
 
@@ -289,6 +497,12 @@ public class BattleHandler : MonoBehaviour
 
         if (AllyBattle3.IsDead())
             allyTarget = AllyBattle2;
+
+        if (enemyBattle.IsDead())
+            enemyTarget = enemy3Battle;
+
+        if (enemy3Battle.IsDead())
+            enemyTarget = enemy2Battle;
 
         if (allies == 0)
         {

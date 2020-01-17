@@ -156,6 +156,6 @@ public class CharacterBattle : MonoBehaviour
 
     public void ShowArrow()
     {
-        arrow.SetActive(true);
+            arrow.SetActive(true);
     }
 }

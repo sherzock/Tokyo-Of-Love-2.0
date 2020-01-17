@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class ButtonsBehavior : MonoBehaviour
 {
@@ -38,5 +39,28 @@ public class ButtonsBehavior : MonoBehaviour
             battleHandler.activeCharacter.Heal(Random.Range(battleHandler.activeCharacter.healmin, battleHandler.activeCharacter.healmax));
             battleHandler.ChooseNextActiveCharacter();
         }
+    }
+
+    public void Play()
+    {
+        battleHandler.IsHumanPlaying = true;
+        GameObject.Find("Play").SetActive(false);
+        GameObject.Find("Bot Simulation").SetActive(false);
+        GameObject.Find("Attack").GetComponent<Button>().enabled = true;
+        GameObject.Find("Abilities").GetComponent<Button>().enabled = true;
+        GameObject.Find("Block").GetComponent<Button>().enabled = true;
+    }
+
+    public void Simulation()
+    {
+        battleHandler.IsHumanPlaying = false;
+        GameObject.Find("Play").SetActive(false);
+        GameObject.Find("Bot Simulation").SetActive(false);
+        GameObject.Find("Attack").SetActive(false);
+        GameObject.Find("Abilities").SetActive(false);
+        GameObject.Find("Block").SetActive(false);
+        battleHandler.ChooseNextActiveCharacter();
+        battleHandler.selectedEnemy.HideArrow();
+        battleHandler.selectedEnemy = null;
     }
 }
