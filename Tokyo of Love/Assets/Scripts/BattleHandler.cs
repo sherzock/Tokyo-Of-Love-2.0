@@ -65,6 +65,43 @@ public class BattleHandler : MonoBehaviour
         allyTarget = AllyBattle1;
         enemyTarget = enemyBattle;
         state = State.WaitingForPlayer;
+
+        //Ally1
+        AllyBattle1.Originaldamagemin = AllyBattle1.damagemin;
+        AllyBattle1.Originaldamagemax = AllyBattle1.damagemax;
+        AllyBattle1.Originalhealmax = AllyBattle1.healmax;
+        AllyBattle1.Originalhealmin = AllyBattle1.healmin;
+        AllyBattle1.OriginalhealthMax = AllyBattle1.healthMax;
+        //Ally2
+        AllyBattle2.Originaldamagemin = AllyBattle2.damagemin;
+        AllyBattle2.Originaldamagemax = AllyBattle2.damagemax;
+        AllyBattle2.Originalhealmax = AllyBattle2.healmax;
+        AllyBattle2.Originalhealmin = AllyBattle2.healmin;
+        AllyBattle2.OriginalhealthMax = AllyBattle2.healthMax;
+        //Ally3
+        AllyBattle3.Originaldamagemin = AllyBattle3.damagemin;
+        AllyBattle3.Originaldamagemax = AllyBattle3.damagemax;
+        AllyBattle3.Originalhealmax = AllyBattle3.healmax;
+        AllyBattle3.Originalhealmin = AllyBattle3.healmin;
+        AllyBattle3.OriginalhealthMax = AllyBattle3.healthMax;
+        //Enemy1
+        enemyBattle.Originaldamagemin = enemyBattle.damagemin;
+        enemyBattle.Originaldamagemax = enemyBattle.damagemax;
+        enemyBattle.Originalhealmax = enemyBattle.healmax;
+        enemyBattle.Originalhealmin = enemyBattle.healmin;
+        enemyBattle.OriginalhealthMax = enemyBattle.healthMax;
+        //Enemy2
+        enemy2Battle.Originaldamagemin = enemy2Battle.damagemin;
+        enemy2Battle.Originaldamagemax = enemy2Battle.damagemax;
+        enemy2Battle.Originalhealmax = enemy2Battle.healmax;
+        enemy2Battle.Originalhealmin = enemy2Battle.healmin;
+        enemy2Battle.OriginalhealthMax = enemy2Battle.healthMax;
+        //Enemy3
+        enemy3Battle.Originaldamagemin = enemy3Battle.damagemin;
+        enemy3Battle.Originaldamagemax = enemy3Battle.damagemax;
+        enemy3Battle.Originalhealmax = enemy3Battle.healmax;
+        enemy3Battle.Originalhealmin = enemy3Battle.healmin;
+        enemy3Battle.OriginalhealthMax = enemy3Battle.healthMax;
     }
 
     private void Update()
@@ -521,5 +558,160 @@ public class BattleHandler : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void LevelUpgrade(int NewLevel)
+    {
+        //Ally1
+        if(NewLevel <= 1)
+        {
+            AllyBattle1.damagemin = AllyBattle1.Originaldamagemin + (AllyBattle1.Originaldamagemin / 100) * 5; 
+            AllyBattle1.damagemax = AllyBattle1.Originaldamagemax + (AllyBattle1.Originaldamagemax / 100) * 9;
+            AllyBattle1.healmax = AllyBattle1.Originalhealmax + (AllyBattle1.Originalhealmax / 100) * 7;
+            AllyBattle1.healmin = AllyBattle1.Originalhealmin + (AllyBattle1.Originalhealmin / 100) * 7;
+            AllyBattle1.healthMax = AllyBattle1.OriginalhealthMax + (AllyBattle1.OriginalhealthMax / 100) * 7;
+
+        }
+        else if(NewLevel == 2)
+        {
+            AllyBattle1.damagemin = AllyBattle1.Originaldamagemin + (AllyBattle1.Originaldamagemin / 100) * 12;
+            AllyBattle1.damagemax = AllyBattle1.Originaldamagemax + (AllyBattle1.Originaldamagemax / 100) * 13;
+            AllyBattle1.healmax = AllyBattle1.Originalhealmax + (AllyBattle1.Originalhealmax / 100) * 15;
+            AllyBattle1.healmin = AllyBattle1.Originalhealmin + (AllyBattle1.Originalhealmin / 100) * 10;
+            AllyBattle1.healthMax = AllyBattle1.OriginalhealthMax + (AllyBattle1.OriginalhealthMax / 100) * 11;
+        }
+        else if(NewLevel >= 3)
+        {
+            AllyBattle1.damagemin = AllyBattle1.Originaldamagemin + (AllyBattle1.Originaldamagemin / 100) * 17;
+            AllyBattle1.damagemax = AllyBattle1.Originaldamagemax + (AllyBattle1.Originaldamagemax / 100) * 19;
+            AllyBattle1.healmax = AllyBattle1.Originalhealmax + (AllyBattle1.Originalhealmax / 100) * 16;
+            AllyBattle1.healmin = AllyBattle1.Originalhealmin + (AllyBattle1.Originalhealmin / 100) * 16;
+            AllyBattle1.healthMax = AllyBattle1.OriginalhealthMax + (AllyBattle1.OriginalhealthMax / 100) * 20;
+        }
+        //Ally2
+        if (NewLevel <= 1)
+        {
+            AllyBattle2.damagemin = AllyBattle2.Originaldamagemin + (AllyBattle2.Originaldamagemin / 100) * 9;
+            AllyBattle2.damagemax = AllyBattle2.damagemax + (AllyBattle2.damagemax / 100) * 9;
+            AllyBattle2.healmax = AllyBattle2.healmax + (AllyBattle2.healmax / 100) * 5;
+            AllyBattle2.healmin = AllyBattle2.healmin + (AllyBattle2.healmin / 100) * 6;
+            AllyBattle2.healthMax = AllyBattle2.healthMax + (AllyBattle2.healthMax / 100) * 6;
+        }
+        else if (NewLevel == 2)
+        {
+            AllyBattle2.damagemin = AllyBattle2.Originaldamagemin + (AllyBattle2.Originaldamagemin / 100) * 15;
+            AllyBattle2.damagemax = AllyBattle2.Originaldamagemax + (AllyBattle2.Originaldamagemax / 100) * 13;
+            AllyBattle2.healmax = AllyBattle2.Originalhealmax + (AllyBattle2.Originalhealmax / 100) * 11;
+            AllyBattle2.healmin = AllyBattle2.Originalhealmin + (AllyBattle2.Originalhealmin / 100) * 11;
+            AllyBattle2.healthMax = AllyBattle2.OriginalhealthMax + (AllyBattle2.OriginalhealthMax / 100) * 12;
+        }
+        else if (NewLevel >= 3)
+        {
+            AllyBattle2.damagemin = AllyBattle2.Originaldamagemin + (AllyBattle2.Originaldamagemin / 100) * 17;
+            AllyBattle2.damagemax = AllyBattle2.Originaldamagemax + (AllyBattle2.Originaldamagemax / 100) * 16;
+            AllyBattle2.healmax = AllyBattle2.Originalhealmax + (AllyBattle2.Originalhealmax / 100) * 19;
+            AllyBattle2.healmin = AllyBattle2.Originalhealmin + (AllyBattle2.Originalhealmin / 100) * 17;
+            AllyBattle2.healthMax = AllyBattle2.OriginalhealthMax + (AllyBattle2.OriginalhealthMax / 100) * 20;
+        }
+        //Ally3
+        if (NewLevel <= 1)
+        {
+            AllyBattle3.damagemin = AllyBattle3.Originaldamagemin + (AllyBattle3.Originaldamagemin / 100) * 6;
+            AllyBattle3.damagemax = AllyBattle3.damagemax + (AllyBattle3.damagemax / 100) * 6;
+            AllyBattle3.healmax = AllyBattle3.healmax + (AllyBattle3.healmax / 100) * 7;
+            AllyBattle3.healmin = AllyBattle3.healmin + (AllyBattle3.healmin / 100) * 10;
+            AllyBattle3.healthMax = AllyBattle3.healthMax + (AllyBattle3.healthMax / 100) * 10;
+        }
+        else if (NewLevel == 2)
+        {
+            AllyBattle3.damagemin = AllyBattle3.Originaldamagemin + (AllyBattle3.Originaldamagemin / 100) * 12;
+            AllyBattle3.damagemax = AllyBattle3.Originaldamagemax + (AllyBattle3.Originaldamagemax / 100) * 14;
+            AllyBattle3.healmax = AllyBattle3.Originalhealmax + (AllyBattle3.Originalhealmax / 100) * 11;
+            AllyBattle3.healmin = AllyBattle3.Originalhealmin + (AllyBattle3.Originalhealmin / 100) * 14;
+            AllyBattle3.healthMax = AllyBattle3.OriginalhealthMax + (AllyBattle3.OriginalhealthMax / 100) * 14;
+        }
+        else if (NewLevel >= 3)
+        {
+            AllyBattle3.damagemin = AllyBattle3.Originaldamagemin + (AllyBattle3.Originaldamagemin / 100) * 16;
+            AllyBattle3.damagemax = AllyBattle3.Originaldamagemax + (AllyBattle3.Originaldamagemax / 100) * 17;
+            AllyBattle3.healmax = AllyBattle3.Originalhealmax + (AllyBattle3.Originalhealmax / 100) * 16;
+            AllyBattle3.healmin = AllyBattle3.Originalhealmin + (AllyBattle3.Originalhealmin / 100) * 20;
+            AllyBattle3.healthMax = AllyBattle3.OriginalhealthMax + (AllyBattle3.OriginalhealthMax / 100) * 20;
+        }
+        //Enemy1
+        if (NewLevel <= 1)
+        {
+            enemyBattle.damagemin = enemyBattle.Originaldamagemin + (enemyBattle.Originaldamagemin / 100) * 9;
+            enemyBattle.damagemax = enemyBattle.Originaldamagemax + (enemyBattle.damagemax / 100) * 10;
+            enemyBattle.healmax = enemyBattle.Originalhealmax + (enemyBattle.Originalhealmax / 100) * 6;
+            enemyBattle.healmin = enemyBattle.Originalhealmin + (enemyBattle.Originalhealmin / 100) * 7;
+            enemyBattle.healthMax = enemyBattle.OriginalhealthMax + (enemyBattle.OriginalhealthMax / 100) * 6;
+        }
+        else if (NewLevel == 2)
+        {
+            enemyBattle.damagemin = enemyBattle.Originaldamagemin + (enemyBattle.Originaldamagemin / 100) * 14;
+            enemyBattle.damagemax = enemyBattle.Originaldamagemax + (enemyBattle.Originaldamagemax / 100) * 15;
+            enemyBattle.healmax = enemyBattle.Originalhealmax + (enemyBattle.Originalhealmax / 100) * 11;
+            enemyBattle.healmin = enemyBattle.Originalhealmin + (enemyBattle.Originalhealmin / 100) * 12;
+            enemyBattle.healthMax = enemyBattle.OriginalhealthMax + (enemyBattle.OriginalhealthMax / 100) * 11;
+        }
+        else if (NewLevel >= 3)
+        {
+            enemyBattle.damagemin = enemyBattle.Originaldamagemin + (enemyBattle.Originaldamagemin / 100) * 19;
+            enemyBattle.damagemax = enemyBattle.Originaldamagemax + (enemyBattle.Originaldamagemax / 100) * 20;
+            enemyBattle.healmax = enemyBattle.Originalhealmax + (enemyBattle.Originalhealmax / 100) * 16;
+            enemyBattle.healmin = enemyBattle.Originalhealmin + (enemyBattle.Originalhealmin / 100) * 17;
+            enemyBattle.healthMax = enemyBattle.OriginalhealthMax + (enemyBattle.OriginalhealthMax / 100) * 16;
+        }
+        //Enemy2
+        if (NewLevel <= 1)
+        {
+            enemy2Battle.damagemin = enemy2Battle.Originaldamagemin + (enemy2Battle.Originaldamagemin / 100) * 8;
+            enemy2Battle.damagemax = enemy2Battle.Originaldamagemax + (enemy2Battle.Originaldamagemax / 100) * 9;
+            enemy2Battle.healmax = enemy2Battle.Originalhealmax + (enemy2Battle.Originalhealmax / 100) * 7;
+            enemy2Battle.healmin = enemy2Battle.Originalhealmin + (enemy2Battle.Originalhealmin / 100) * 6;
+            enemy2Battle.healthMax = enemy2Battle.OriginalhealthMax + (enemy2Battle.OriginalhealthMax / 100) * 10;
+        }
+        else if (NewLevel == 2)
+        {
+            enemy2Battle.damagemin = enemy2Battle.Originaldamagemin + (enemy2Battle.Originaldamagemin / 100) * 12;
+            enemy2Battle.damagemax = enemy2Battle.Originaldamagemax + (enemy2Battle.Originaldamagemax / 100) * 13;
+            enemy2Battle.healmax = enemy2Battle.Originalhealmax + (enemy2Battle.Originalhealmax / 100) * 11;
+            enemy2Battle.healmin = enemy2Battle.Originalhealmin + (enemy2Battle.Originalhealmin / 100) * 13;
+            enemy2Battle.healthMax = enemy2Battle.OriginalhealthMax + (enemy2Battle.OriginalhealthMax / 100) * 15;
+        }
+        else if (NewLevel >= 3)
+        {
+            enemy2Battle.damagemin = enemy2Battle.Originaldamagemin + (enemy2Battle.Originaldamagemin / 100) * 17;
+            enemy2Battle.damagemax = enemy2Battle.Originaldamagemax + (enemy2Battle.damagemax / 100) * 16;
+            enemy2Battle.healmax = enemy2Battle.Originalhealmax + (enemy2Battle.Originalhealmax / 100) * 15;
+            enemy2Battle.healmin = enemy2Battle.Originalhealmin + (enemy2Battle.Originalhealmin / 100) * 15;
+            enemy2Battle.healthMax = enemy2Battle.OriginalhealthMax + (enemy2Battle.OriginalhealthMax / 100) * 20;
+        }
+        //Enemy3
+        if (NewLevel <= 1)
+        {
+            enemy3Battle.damagemin = enemy3Battle.Originaldamagemin + (enemy3Battle.Originaldamagemin / 100) * 8;
+            enemy3Battle.damagemax = enemy3Battle.Originaldamagemax + (enemy3Battle.damagemax / 100) * 9;
+            enemy3Battle.healmax = enemy3Battle.Originalhealmax + (enemy3Battle.Originalhealmax / 100) * 6;
+            enemy3Battle.healmin = enemy3Battle.Originalhealmin + (enemy3Battle.Originalhealmin / 100) * 5;
+            enemy3Battle.healthMax = enemy3Battle.healthMax + (enemy3Battle.OriginalhealthMax / 100) * 10;
+        }
+        else if (NewLevel == 2)
+        {
+            enemy3Battle.damagemin = enemy3Battle.Originaldamagemin + (enemy3Battle.Originaldamagemin / 100) * 12;
+            enemy3Battle.damagemax = enemy3Battle.Originaldamagemax + (enemy3Battle.Originaldamagemax / 100) * 11;
+            enemy3Battle.healmax = enemy3Battle.Originalhealmax + (enemy3Battle.Originalhealmax / 100) * 14;
+            enemy3Battle.healmin = enemy3Battle.Originalhealmin + (enemy3Battle.Originalhealmin / 100) * 12;
+            enemy3Battle.healthMax = enemy3Battle.OriginalhealthMax + (enemy3Battle.OriginalhealthMax / 100) * 13;
+        }
+        else if (NewLevel >= 3)
+        {
+            enemy3Battle.damagemin = enemy3Battle.Originaldamagemin + (enemy3Battle.Originaldamagemin / 100) * 17;
+            enemy3Battle.damagemax = enemy3Battle.Originaldamagemax + (enemy3Battle.Originaldamagemax / 100) * 17;
+            enemy3Battle.healmax = enemy3Battle.Originalhealmax + (enemy3Battle.Originalhealmax / 100) * 15;
+            enemy3Battle.healmin = enemy3Battle.Originalhealmin + (enemy3Battle.Originalhealmin / 100) * 19;
+            enemy3Battle.healthMax = enemy3Battle.OriginalhealthMax + (enemy3Battle.OriginalhealthMax / 100) * 20;
+        }
     }
 }

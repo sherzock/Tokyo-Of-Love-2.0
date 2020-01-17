@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class ButtonsBehavior : MonoBehaviour
 {
     private BattleHandler battleHandler;
+    public GameObject Inputfieldd;
 
     public void Start()
     {
@@ -62,5 +63,15 @@ public class ButtonsBehavior : MonoBehaviour
         battleHandler.ChooseNextActiveCharacter();
         battleHandler.selectedEnemy.HideArrow();
         battleHandler.selectedEnemy = null;
+    }
+
+    public void Enter()
+    {
+        string Level;
+        int level;
+        Level = Inputfieldd.GetComponent<Text>().text;
+
+        int.TryParse(Level, out level);
+        battleHandler.LevelUpgrade(level);
     }
 }

@@ -16,6 +16,11 @@ public class CharacterBattle : MonoBehaviour
     public int damagemax;
     public int healmax;
     public int healmin;
+    public int Originaldamagemin;
+    public int Originaldamagemax;
+    public int Originalhealmax;
+    public int Originalhealmin;
+    public int OriginalhealthMax;
     private BattleHandler battleHandler;
 
     [SerializeField] private Transform damagePopup;
