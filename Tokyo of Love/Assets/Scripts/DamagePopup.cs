@@ -37,7 +37,7 @@ public class DamagePopup : MonoBehaviour
         else
         {
             text.fontSize = 50;
-            textColor = Color.yellow;
+            textColor = Color.green;
         }
 
         text.color = textColor;

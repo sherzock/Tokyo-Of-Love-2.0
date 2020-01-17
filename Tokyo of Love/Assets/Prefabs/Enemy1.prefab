@@ -570,7 +570,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &965996220628265222
@@ -593,6 +593,8 @@ MonoBehaviour:
   blocking: 0
   damagemin: 1
   damagemax: 3
+  healmax: 20
+  healmin: 30
   damagePopup: {fileID: 8725692001338364792, guid: 94145ba971d36e94cb3c0e7207a4dde0,
     type: 3}
 --- !u!1 &965996220900715361

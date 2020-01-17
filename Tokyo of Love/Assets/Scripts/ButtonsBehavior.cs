@@ -32,6 +32,11 @@ public class ButtonsBehavior : MonoBehaviour
 
     public void Abilities()
     {
-
+        if (battleHandler.state == BattleHandler.State.WaitingForPlayer)
+        {
+            battleHandler.state = BattleHandler.State.Busy;
+            battleHandler.activeCharacter.Heal(Random.Range(battleHandler.activeCharacter.healmin, battleHandler.activeCharacter.healmax));
+            battleHandler.ChooseNextActiveCharacter();
+        }
     }
 }

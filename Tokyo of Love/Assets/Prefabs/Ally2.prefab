@@ -803,7 +803,7 @@ GameObject:
   - component: {fileID: 4349196751316020947}
   - component: {fileID: -23613757769371328}
   m_Layer: 0
-  m_Name: BunkerTest
+  m_Name: Ally2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -873,7 +873,7 @@ SpriteRenderer:
   m_Size: {x: 0.77, y: 0.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &4349196751316020947
@@ -896,6 +896,8 @@ MonoBehaviour:
   blocking: 0
   damagemin: 20
   damagemax: 50
+  healmax: 20
+  healmin: 30
   damagePopup: {fileID: 8725692001338364792, guid: 94145ba971d36e94cb3c0e7207a4dde0,
     type: 3}
 --- !u!95 &-23613757769371328
@@ -908,7 +910,7 @@ Animator:
   m_GameObject: {fileID: 8749764089793450770}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 86ca6c4987f0c2a4cb6bb406f577a2b3, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

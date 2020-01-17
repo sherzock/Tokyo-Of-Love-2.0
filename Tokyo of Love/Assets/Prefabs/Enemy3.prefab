@@ -593,6 +593,8 @@ MonoBehaviour:
   blocking: 0
   damagemin: 1
   damagemax: 3
+  healmax: 20
+  healmin: 30
   damagePopup: {fileID: 8725692001338364792, guid: 94145ba971d36e94cb3c0e7207a4dde0,
     type: 3}
 --- !u!1 &3178991366087827907

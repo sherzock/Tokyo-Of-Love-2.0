@@ -14,6 +14,8 @@ public class CharacterBattle : MonoBehaviour
     public bool blocking = false;
     public int damagemin;
     public int damagemax;
+    public int healmax;
+    public int healmin;
     private BattleHandler battleHandler;
 
     [SerializeField] private Transform damagePopup;
@@ -86,7 +88,13 @@ public class CharacterBattle : MonoBehaviour
     public void Damage(int damageAmount)
     {
         healthSystem.Damage(damageAmount);
-        DamagePopup.Create(damagePopup, GetPosition(), damageAmount, false);
+        DamagePopup.Create(damagePopup, GetPosition(), damageAmount, true);
+    }
+
+    public void Heal(int HealAmount)
+    {
+        healthSystem.Heal(HealAmount);
+        DamagePopup.Create(damagePopup, GetPosition(), HealAmount, false);
     }
 
     public bool IsDead()

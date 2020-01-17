@@ -170,11 +170,30 @@ public class BattleHandler : MonoBehaviour
         {
             SetActiveCharacterBattle(enemyBattle);
             if (enemyBattle.IsDead() == false) {
+
+                activeCharacter.blocking = false;
                 state = State.Busy;
-                enemyBattle.Attack(allyTarget, () => {
+
+                int randomAction = Random.Range(1, 4);
+
+                if (randomAction == 1)
+                {
+                    enemyBattle.Attack(allyTarget, () =>
+                    {
+                        ChooseNextActiveCharacter();
+                    });
+                }
+                else if (randomAction == 2)
+                {
+                    enemyBattle.blocking = true;
                     ChooseNextActiveCharacter();
-                });
-            } else ChooseNextActiveCharacter();
+                }
+                else if (randomAction >= 3)
+                {
+                    enemyBattle.Heal(Random.Range(enemyBattle.healmin, enemyBattle.healmax));
+                    ChooseNextActiveCharacter();
+                }
+        } else ChooseNextActiveCharacter();
         }
         // Ally2 turn
         else if (activeCharacter == enemyBattle)
@@ -190,10 +209,28 @@ public class BattleHandler : MonoBehaviour
         {
             SetActiveCharacterBattle(enemy2Battle);
             if (enemy2Battle.IsDead() == false) {
+                activeCharacter.blocking = false;
                 state = State.Busy;
-                enemy2Battle.Attack(allyTarget, () => {
+
+                int randomAction = Random.Range(1, 4);
+
+                if (randomAction == 1)
+                {
+                    enemy2Battle.Attack(allyTarget, () =>
+                    {
+                        ChooseNextActiveCharacter();
+                    });
+                }
+                else if (randomAction == 2)
+                {
+                    enemy2Battle.blocking = true;
                     ChooseNextActiveCharacter();
-                });
+                }
+                else if (randomAction >= 3)
+                {
+                    enemy2Battle.Heal(Random.Range(enemy2Battle.healmin, enemy2Battle.healmax));
+                    ChooseNextActiveCharacter();
+                }
             } else ChooseNextActiveCharacter();
         }
         // Ally3 turn
@@ -210,10 +247,28 @@ public class BattleHandler : MonoBehaviour
         {
             SetActiveCharacterBattle(enemy3Battle);
             if (enemy3Battle.IsDead() == false) {
+                activeCharacter.blocking = false;
                 state = State.Busy;
-                enemy3Battle.Attack(allyTarget, () => {
+
+                int randomAction = Random.Range(1, 4);
+
+                if (randomAction == 1)
+                {
+                    enemy3Battle.Attack(allyTarget, () =>
+                    {
+                        ChooseNextActiveCharacter();
+                    });
+                }
+                else if (randomAction == 2)
+                {
+                    enemy3Battle.blocking = true;
                     ChooseNextActiveCharacter();
-                });
+                }
+                else if (randomAction >= 3)
+                {
+                    enemy3Battle.Heal(Random.Range(enemy3Battle.healmin, enemy3Battle.healmax));
+                    ChooseNextActiveCharacter();
+                }
             } else ChooseNextActiveCharacter();
         }
         // Ally1 turn
