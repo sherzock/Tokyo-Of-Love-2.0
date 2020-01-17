@@ -50,21 +50,11 @@ public class CharacterBattle : MonoBehaviour
 
         healthSystem = new HealthSystem(healthMax);
         healthSystem.OnHealthChanged += HealthSystem_OnHealthChanged;
-        //PlayIdleAnimation();
     }
 
     private void HealthSystem_OnHealthChanged(object sender, EventArgs e)
     {
         healthBar.SetSize(healthSystem.GetHealthPercent());
-    }
-
-    private void PlayIdleAnimation()
-    {
-        /*if(isPlayerAlly)
-            controller. // Play idle animation new Vector(1, 0)
-        else
-            controller. // Play idle animation new Vector(-1, 0)
-        */
     }
 
     private void Update()
@@ -97,9 +87,6 @@ public class CharacterBattle : MonoBehaviour
     {
         healthSystem.Damage(damageAmount);
         DamagePopup.Create(damagePopup, GetPosition(), damageAmount, false);
-
-        /*if(healthSystem.IsDead())
-            controller. // play dead animation*/
     }
 
     public bool IsDead()
@@ -117,7 +104,6 @@ public class CharacterBattle : MonoBehaviour
             // Arrive to target, attack it
             state = State.Busy;
             Vector3 attackDir = (target.GetPosition() - GetPosition()).normalized;
-            //controller. // Play attack animation
             
             int damageAmount = UnityEngine.Random.Range(damagemin, damagemax);
             
@@ -133,7 +119,6 @@ public class CharacterBattle : MonoBehaviour
             // Attack comlpeted, slide back
             SlideToPosition(startingPosition, () => {
                 state = State.Idle;
-                //controller. // Play idle animation
                 onAttackComplete();
             });
         });
@@ -144,10 +129,6 @@ public class CharacterBattle : MonoBehaviour
         this.slideTargetPosition = slideTargetPosition;
         this.onSlideComplete = onSlideComplete;
         state = State.Sliding;
-        //if (slideTargetPosition.x > 0)
-        // controller. // Play slide animation right
-        // else
-        // controller. // Play slide animation left 
     }
 
     public void HideSelectionCircle()

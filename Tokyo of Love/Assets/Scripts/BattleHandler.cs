@@ -10,10 +10,12 @@ public class BattleHandler : MonoBehaviour
         return instance;
     }
 
-    [SerializeField] private Transform beta;
-    [SerializeField] private Transform ween;
-    [SerializeField] private Transform bunker;
-    [SerializeField] private Transform enemy;
+    [SerializeField] private Transform Ally1;
+    [SerializeField] private Transform Ally2;
+    [SerializeField] private Transform Ally3;
+    [SerializeField] private Transform Enemy1;
+    [SerializeField] private Transform Enemy2;
+    [SerializeField] private Transform Enemy3;
     public CharacterBattle activeCharacter;
     public CharacterBattle selectedEnemy;
     public CharacterBattle allyTarget;
@@ -22,9 +24,9 @@ public class BattleHandler : MonoBehaviour
     public uint enemies = 3;
     public uint allies = 3;
 
-    private CharacterBattle betaBattle;
-    private CharacterBattle bunkerBattle;
-    private CharacterBattle weenBattle;
+    private CharacterBattle AllyBattle1;
+    private CharacterBattle AllyBattle2;
+    private CharacterBattle AllyBattle3;
 
     private CharacterBattle enemyBattle;
     private CharacterBattle enemy2Battle;
@@ -46,17 +48,17 @@ public class BattleHandler : MonoBehaviour
 
     private void Start()
     {
-        bunkerBattle = SpawnCharacter(true);
-        weenBattle = SpawnCharacter(true);
-        betaBattle = SpawnCharacter(true);
+        AllyBattle3 = SpawnCharacter(true);
+        AllyBattle2 = SpawnCharacter(true);
+        AllyBattle1 = SpawnCharacter(true);
         enemyBattle = SpawnCharacter(false);
         enemy2Battle = SpawnCharacter(false);
         enemy3Battle = SpawnCharacter(false);
 
-        SetActiveCharacterBattle(betaBattle);
-        selectedEnemy = enemyBattle;
+        SetActiveCharacterBattle(AllyBattle1);
+        selectedEnemy = enemy3Battle;
         selectedEnemy.ShowArrow();
-        allyTarget = betaBattle;
+        allyTarget = AllyBattle1;
         state = State.WaitingForPlayer;
     }
 
@@ -66,15 +68,15 @@ public class BattleHandler : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                if (selectedEnemy == enemy3Battle)
-                {
-                    enemy3Battle.HideArrow();
-                    selectedEnemy = enemy2Battle;
-                }
-                else if (selectedEnemy == enemy2Battle)
+                if (selectedEnemy == enemy2Battle)
                 {
                     enemy2Battle.HideArrow();
                     selectedEnemy = enemyBattle;
+                }
+                else if (selectedEnemy == enemyBattle)
+                {
+                    enemyBattle.HideArrow();
+                    selectedEnemy = enemy3Battle;
                 }
 
                 selectedEnemy.ShowArrow();
@@ -82,15 +84,15 @@ public class BattleHandler : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                if (selectedEnemy == enemyBattle)
+                if (selectedEnemy == enemy3Battle)
+                {
+                    enemy3Battle.HideArrow();
+                    selectedEnemy = enemyBattle;
+                }
+                else if (selectedEnemy == enemyBattle)
                 {
                     enemyBattle.HideArrow();
                     selectedEnemy = enemy2Battle;
-                }
-                else if (selectedEnemy == enemy2Battle)
-                {
-                    enemy2Battle.HideArrow();
-                    selectedEnemy = enemy3Battle;
                 }
 
                 selectedEnemy.ShowArrow();
@@ -109,27 +111,37 @@ public class BattleHandler : MonoBehaviour
             if (characterSpawn == 3)
             {
                 position = new Vector3(70, 0);
-                characterTransform = Instantiate(beta, position, Quaternion.identity);
+                characterTransform = Instantiate(Ally1, position, Quaternion.identity);
             }
             else if (characterSpawn == 2)
             {
                 position = new Vector3(90, 20);
-                characterTransform = Instantiate(bunker, position, Quaternion.identity);
+                characterTransform = Instantiate(Ally3, position, Quaternion.identity);
             }
             else if (characterSpawn == 1)
             {
                 position = new Vector3(90, -20);
-                characterTransform = Instantiate(ween, position, Quaternion.identity);
+                characterTransform = Instantiate(Ally2, position, Quaternion.identity);
             }
         }
         else
         {
             enemySpawn++;
-            if (enemySpawn == 1) position = new Vector3(-90, 20);
-            else if (enemySpawn == 2) position = new Vector3(-70, 0);
-            else if (enemySpawn == 3) position = new Vector3(-90, -20);
-
-            characterTransform = Instantiate(enemy, position, Quaternion.identity);
+            if (enemySpawn == 3)
+            {
+                position = new Vector3(-90, 20);
+                characterTransform = Instantiate(Enemy1, position, Quaternion.identity);
+            }
+            else if (enemySpawn == 2)
+            {
+                position = new Vector3(-90, -20);
+                characterTransform = Instantiate(Enemy3, position, Quaternion.identity);
+            }
+            else if (enemySpawn == 1)
+            {
+                position = new Vector3(-70, 0);
+                characterTransform = Instantiate(Enemy2, position, Quaternion.identity);
+            }
         }
                 
         CharacterBattle characterBattle = characterTransform.GetComponent<CharacterBattle>();
@@ -154,7 +166,7 @@ public class BattleHandler : MonoBehaviour
         if (BattleOver()) return;
 
         // Enemy 1 turn
-        if (activeCharacter == betaBattle)
+        if (activeCharacter == AllyBattle1)
         {
             SetActiveCharacterBattle(enemyBattle);
             if (enemyBattle.IsDead() == false) {
@@ -164,17 +176,17 @@ public class BattleHandler : MonoBehaviour
                 });
             } else ChooseNextActiveCharacter();
         }
-        // Bunker turn
+        // Ally2 turn
         else if (activeCharacter == enemyBattle)
         {
-            SetActiveCharacterBattle(bunkerBattle);
-            if (bunkerBattle.IsDead() == false) {
+            SetActiveCharacterBattle(AllyBattle3);
+            if (AllyBattle3.IsDead() == false) {
                 activeCharacter.blocking = false;
                 state = State.WaitingForPlayer;
             } else ChooseNextActiveCharacter();
         }
         // Enemy 2 turn
-        else if (activeCharacter == bunkerBattle)
+        else if (activeCharacter == AllyBattle3)
         {
             SetActiveCharacterBattle(enemy2Battle);
             if (enemy2Battle.IsDead() == false) {
@@ -184,17 +196,17 @@ public class BattleHandler : MonoBehaviour
                 });
             } else ChooseNextActiveCharacter();
         }
-        // Ween turn
+        // Ally3 turn
         else if (activeCharacter == enemy2Battle)
         {
-            SetActiveCharacterBattle(weenBattle);
-            if (weenBattle.IsDead() == false) {
+            SetActiveCharacterBattle(AllyBattle2);
+            if (AllyBattle2.IsDead() == false) {
                 activeCharacter.blocking = false;
                 state = State.WaitingForPlayer;
             } else ChooseNextActiveCharacter();
         }
         // Enemy 3 turn
-        else if (activeCharacter == weenBattle)
+        else if (activeCharacter == AllyBattle2)
         {
             SetActiveCharacterBattle(enemy3Battle);
             if (enemy3Battle.IsDead() == false) {
@@ -204,11 +216,11 @@ public class BattleHandler : MonoBehaviour
                 });
             } else ChooseNextActiveCharacter();
         }
-        // Beta turn
+        // Ally1 turn
         else
         {
-            SetActiveCharacterBattle(betaBattle);
-            if (betaBattle.IsDead() == false) {
+            SetActiveCharacterBattle(AllyBattle1);
+            if (AllyBattle1.IsDead() == false) {
                 activeCharacter.blocking = false;
                 state = State.WaitingForPlayer;
             } else ChooseNextActiveCharacter();
@@ -217,11 +229,11 @@ public class BattleHandler : MonoBehaviour
 
     private bool BattleOver()
     {
-        if (betaBattle.IsDead())
-            allyTarget = bunkerBattle;
+        if (AllyBattle1.IsDead())
+            allyTarget = AllyBattle3;
 
-        if (bunkerBattle.IsDead())
-            allyTarget = weenBattle;
+        if (AllyBattle3.IsDead())
+            allyTarget = AllyBattle2;
 
         if (allies == 0)
         {
