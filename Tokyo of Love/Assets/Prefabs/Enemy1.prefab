@@ -587,14 +587,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slideSpeed: 10
   reachedDistance: 1
-  healthMax: 1000
+  healthMax: 100
   healthBar: {fileID: 965996220245311693}
   checkedDeath: 0
   blocking: 0
-  damagemin: 1000
-  damagemax: 1000
-  healmax: 20
-  healmin: 30
+  damagemin: 40
+  damagemax: 60
+  healmax: 40
+  healmin: 20
   Originaldamagemin: 0
   Originaldamagemax: 0
   Originalhealmax: 0

@@ -137,7 +137,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 117964169d2014147a1e0810379a25ae, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -380,13 +380,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slideSpeed: 10
   reachedDistance: 1
-  healthMax: 100
+  healthMax: 150
   healthBar: {fileID: 4744238224680817192}
   checkedDeath: 0
   blocking: 0
-  damagemin: 1000
-  damagemax: 1000
-  healmax: 20
+  damagemin: 60
+  damagemax: 80
+  healmax: 60
   healmin: 30
   Originaldamagemin: 0
   Originaldamagemax: 0
@@ -800,7 +800,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 117964169d2014147a1e0810379a25ae, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -891,7 +891,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 117964169d2014147a1e0810379a25ae, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
