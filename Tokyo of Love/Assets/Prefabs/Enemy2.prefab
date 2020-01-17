@@ -500,8 +500,8 @@ MonoBehaviour:
   healthBar: {fileID: 3257076425714195205}
   checkedDeath: 0
   blocking: 0
-  damagemin: 1
-  damagemax: 3
+  damagemin: 1000
+  damagemax: 1000
   healmax: 20
   healmin: 30
   damagePopup: {fileID: 8725692001338364792, guid: 94145ba971d36e94cb3c0e7207a4dde0,

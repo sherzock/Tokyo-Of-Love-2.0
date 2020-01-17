@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BattleHandler : MonoBehaviour
 {
@@ -507,11 +508,15 @@ public class BattleHandler : MonoBehaviour
         if (allies == 0)
         {
             Debug.Log("Enemy wins");
+            GameObject.Find("BattleEndBg").GetComponent<Image>().enabled = true;
+            GameObject.Find("Enemies Win").GetComponent<Text>().enabled = true;
             return true;
         }
         else if (enemies == 0)
         {
             Debug.Log("Player wins");
+            GameObject.Find("BattleEndBg").GetComponent<Image>().enabled = true;
+            GameObject.Find("Allies Win").GetComponent<Text>().enabled = true;
             return true;
         }
 
